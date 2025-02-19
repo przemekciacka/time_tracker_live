@@ -1,7 +1,7 @@
 <div class="bg-white border border-gray-300 rounded">
     <div class="h-16 mx-3 flex items-center gap-3">
         <input type="text" class="border-none w-full focus:ring-0" placeholder="What are you working on?" autofocus />
-        <div class="text-xl font-bold">00:00:00</div>
+        <div class="text-xl font-bold">{@seconds}</div>
 
         
         <button type="button" class="text-emerald-500 active:text-emerald-700" :if={!@enabled} phx-click="toggle">
