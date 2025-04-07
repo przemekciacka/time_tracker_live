@@ -1,9 +1,10 @@
 defmodule TimeTrackerLiveWeb.TimerLive do
   use TimeTrackerLiveWeb, :live_view
 
-  def mount(_params, _session, socket) do
+  def mount(_params, %{ "session_id" => session_id }, socket) do
     {:ok,
      socket
+     |> assign(:session_id, session_id)
      |> assign(:running, false)
      |> assign(:seconds, 0)}
   end

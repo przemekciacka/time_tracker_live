@@ -18,3 +18,4 @@ Things I'm curious about but not investigating right now.
 - There are two approaches to handling LiveView messages:
     1. Using pattern matching in function heads for `handle_info` and `handle_event`
     2. Using conditional statements (`if`) inside a single function
+- ⚠️ You can't set cookies when using LiveView. It operates over websocket and doesn't have access to request/response.
