@@ -4,7 +4,7 @@ A lightweight time tracker built as part of a creative microcycle project.
 This is an experiment in building functional software over perfect code, using Phoenix LiveView in a fullstack way, with minimal JavaScript.
 
 ## 📦 Features (MVP)
-- [ ] Start/stop a timer
+- [x] Start/stop a timer
 - [ ] Add a description to a task
 - [ ] Show a list of completed entries
 - [ ] Preserve timer state across browser sessions
