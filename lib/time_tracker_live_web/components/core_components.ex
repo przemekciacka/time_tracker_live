@@ -20,6 +20,27 @@ defmodule TimeTrackerLiveWeb.CoreComponents do
   alias Phoenix.LiveView.JS
 
   @doc """
+  Formats seconds into a human-readable string.
+  """
+  attr :seconds, :integer, required: true
+
+  def format_seconds(%{seconds: seconds} = assigns) when seconds > 0 do
+    assigns = assign(assigns, :hours, div(seconds, 3600) |> Integer.to_string() |> String.pad_leading(2, "0"))
+    assigns = assign(assigns, :minutes, div(rem(seconds, 3600), 60) |> Integer.to_string() |> String.pad_leading(2, "0"))
+    assigns = assign(assigns, :seconds, rem(seconds, 60) |> Integer.to_string() |> String.pad_leading(2, "0"))
+
+    ~H"""
+    {@hours}:{@minutes}:{@seconds}
+    """
+  end
+
+  def format_seconds(%{seconds: seconds} = assigns) when seconds == 0 do
+    ~H"""
+    00:00:00
+    """
+  end
+
+  @doc """
   Renders a modal.
 
   ## Examples

@@ -1,4 +1,6 @@
 <form phx-submit="toggle_timer">
-    <span><%= @seconds %></span>
+    <span>
+      <.format_seconds seconds={@seconds} />
+    </span>
     <.button type="submit">{if @running, do: "Stop timer", else: "Start timer"}</.button>
 </form>
