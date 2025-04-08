@@ -4,3 +4,13 @@
     </span>
     <.button type="submit">{if @running, do: "Stop timer", else: "Start timer"}</.button>
 </form>
+
+Finished tasks:
+<ul>
+  <%= for task <- @finished_tasks do %>
+    <li>
+      <.format_seconds seconds={task.end_time - task.start_time} />
+      <%= task.name %>
+    </li>
+  <% end %>
+</ul>

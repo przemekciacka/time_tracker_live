@@ -11,6 +11,8 @@ Things I'm curious about but not investigating right now.
 - How do I define my own reusable components in Phoenix LiveView?
 - Why are LiveView templates (e.g. `timer_live.html.heex`) kept in the same directory as the LiveView module, while controller templates are placed in directory named after controller (e.g. `page_html/`)?
 - Is it possible to do optimistic UI with LiveView?
+- What's the significant difference between function pattern matching vs. `if` conditional statement?
+- Is it possible to call `handle_call` from within `handle_call` in GenServer? I faced with `process attempted to call itself` error.
 
 ## 🧠 Insights / Lessons Learned
 
@@ -19,3 +21,5 @@ Things I'm curious about but not investigating right now.
     1. Using pattern matching in function heads for `handle_info` and `handle_event`
     2. Using conditional statements (`if`) inside a single function
 - ⚠️ You can't set cookies when using LiveView. It operates over websocket and doesn't have access to request/response.
+- GenServer keeps its state until application is running.
+- Any change to supervisor tree in `application.ex` requires application restart.
