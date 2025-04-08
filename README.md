@@ -6,10 +6,10 @@ This is an experiment in building functional software over perfect code, using P
 ## 📦 Features (MVP)
 - [x] Start/stop a timer
 - [ ] Add a description to a task
-- [ ] Show a list of completed entries
-- [ ] Preserve timer state across browser sessions
-- [ ] Sync between multiple open browser windows
-- [ ] Session-level user differentiation (no login)
+- [x] Show a list of completed entries
+- [x] Preserve timer state across browser sessions
+- [ ] Sync start/stop between multiple open browser windows
+- [ ] ~~Session-level user differentiation (no login)~~
 
 ## 🔧 Under the Hood
 - Phoenix LiveView (Elixir)
