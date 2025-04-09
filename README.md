@@ -5,7 +5,7 @@ This is an experiment in building functional software over perfect code, using P
 
 ## 📦 Features (MVP)
 - [x] Start/stop a timer
-- [ ] Add a description to a task
+- [x] Add a description to a task
 - [x] Show a list of completed entries
 - [x] Preserve timer state across browser sessions
 - [ ] Sync start/stop between multiple open browser windows
@@ -15,7 +15,7 @@ This is an experiment in building functional software over perfect code, using P
 - Phoenix LiveView (Elixir)
 - GenServer for in-memory state
 - PubSub for real-time sync
-- `cookie` or `localStorage` for session ID
+- ~~`cookie` or `localStorage` for session ID~~
 
 ## 🎯 Development Goals
 - Explore fullstack development in a functional paradigm

@@ -24,3 +24,4 @@ Things I'm curious about but not investigating right now.
 - ⚠️ You can't set cookies when using LiveView. It operates over websocket and doesn't have access to request/response.
 - GenServer keeps its state until application is running.
 - Any change to supervisor tree in `application.ex` requires application restart.
+- I'm used to TypeScript and miss some of the intellisens code features
