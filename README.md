@@ -1,6 +1,6 @@
 # Time Tracker Live (Phoenix LiveView)
 
-A lightweight time tracker built as part of a creative microcycle project.
+A primitive time tracker built as part of a creative microcycle project.
 This is an experiment in building functional software over perfect code, using Phoenix LiveView in a fullstack way, with minimal JavaScript.
 
 ## 📦 Features (MVP)
