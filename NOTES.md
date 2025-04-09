@@ -13,6 +13,7 @@ Things I'm curious about but not investigating right now.
 - Is it possible to do optimistic UI with LiveView?
 - What's the significant difference between function pattern matching vs. `if` conditional statement?
 - Is it possible to call `handle_call` from within `handle_call` in GenServer? I faced with `process attempted to call itself` error.
+- Would it be hard to make an optimistic UI? User clicks, timer start, it resets on failure.
 
 ## 🧠 Insights / Lessons Learned
 

@@ -1,16 +1,16 @@
-<form phx-submit="toggle_timer">
-    <span>
-      <.format_seconds seconds={@seconds} />
-    </span>
-    <.button type="submit">{if @running, do: "Stop timer", else: "Start timer"}</.button>
+<form id="timer-form" phx-submit="toggle_timer">
+  <input type="text" name="name" phx-change="update_name" phx-debounce="300" />
+  <span id="timer-display" phx-hook="TimerDisplay" data-start-time={@start_time}>00:00:00</span>
+  <.button type="submit">{if @start_time, do: "Stop", else: "Start"}</.button>
 </form>
 
-Finished tasks:
+All tasks:
 <ul>
-  <%= for task <- @finished_tasks do %>
+  <%= for task <- @tasks do %>
     <li>
-      <.format_seconds seconds={task.end_time - task.start_time} />
-      <%= task.name %>
+      <span><%= task.name %></span>
+      <span>—</span>
+      <span><%= task.start_time %></span>
     </li>
   <% end %>
 </ul>

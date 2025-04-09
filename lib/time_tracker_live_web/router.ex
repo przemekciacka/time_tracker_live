@@ -17,7 +17,7 @@ defmodule TimeTrackerLiveWeb.Router do
   scope "/", TimeTrackerLiveWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
+    live "/", TimerLive, :home
   end
 
   # Other scopes may use custom stacks.

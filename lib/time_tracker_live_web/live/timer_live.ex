@@ -2,44 +2,34 @@ defmodule TimeTrackerLiveWeb.TimerLive do
   use TimeTrackerLiveWeb, :live_view
 
   def mount(_params, _session, socket) do
-    current_task = TimeTrackerLive.Tasks.current_task()
-    running = current_task != nil
-    seconds = current_task
-              |> case do
-                nil -> 0
-                task -> System.system_time(:second) - task.start_time
-              end
-
-    if connected?(socket) && running do
-      Process.send_after(self(), :tick, 1000)
-    end
+    tasks = TimeTrackerLive.Task.all_tasks()
+    current_task = TimeTrackerLive.Task.current_task()
+    start_time = current_task && current_task.start_time || nil
 
     {:ok,
      socket
-     |> assign(:current_task, current_task)
-     |> assign(:running, running)
-     |> assign(:seconds, seconds)
-     |> assign(:finished_tasks, TimeTrackerLive.Tasks.finished_tasks())}
+     |> assign(:tasks, tasks)
+     |> assign(:start_time, start_time)}
   end
 
-  def handle_event("toggle_timer", _params, %{assigns: %{running: false}} = socket) do
-    task = TimeTrackerLive.Tasks.new_task("Example task")
-    Process.send_after(self(), :tick, 1000);
-    {:noreply, socket |> assign(:running, true) |> assign(:current_task, task) |> assign(:seconds, 0)}
+  def handle_event("toggle_timer", %{"name" => name}, %{assigns: %{start_time: nil}} = socket) do
+    task = TimeTrackerLive.Task.start_task(name)
+    tasks = TimeTrackerLive.Task.all_tasks()
+    {:noreply, socket |> assign(:start_time, task.start_time) |> assign(:tasks, tasks)}
   end
 
-  def handle_event("toggle_timer", _params, %{assigns: %{running: true}} = socket) do
-    TimeTrackerLive.Tasks.finish_current_task()
-    finished_tasks = TimeTrackerLive.Tasks.finished_tasks()
-    {:noreply, socket |> assign(:running, false) |> assign(:finished_tasks, finished_tasks) |> assign(:current_task, nil) |> assign(:seconds, 0)}
+  def handle_event("toggle_timer", _params, socket) do
+    TimeTrackerLive.Task.stop_task()
+    all_tasks = TimeTrackerLive.Task.all_tasks()
+    {:noreply, socket |> assign(:start_time, nil) |> assign(:tasks, all_tasks)}
   end
 
-  def handle_info(:tick, %{assigns: %{running: true}} = socket) do
-    Process.send_after(self(), :tick, 1000)
-    {:noreply, socket |> assign(:seconds, socket.assigns.seconds + 1)}
+  def handle_event("update_name", %{"name" => name}, %{assigns: %{start_time: start_time}} = socket) when not is_nil(start_time) do
+    TimeTrackerLive.Task.update_name(name)
+    {:noreply, socket}
   end
 
-  def handle_info(:tick, socket) do
+  def handle_event("update_name", _, socket) do
     {:noreply, socket}
   end
 end
