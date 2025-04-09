@@ -8,7 +8,7 @@ This is an experiment in building functional software over perfect code, using P
 - [x] Add a description to a task
 - [x] Show a list of completed entries
 - [x] Preserve timer state across browser sessions
-- [ ] Sync start/stop between multiple open browser windows
+- [x] Sync start/stop between multiple open browser windows
 - [ ] ~~Session-level user differentiation (no login)~~
 
 ## 🔧 Under the Hood
