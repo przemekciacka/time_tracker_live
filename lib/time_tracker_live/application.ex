@@ -21,7 +21,6 @@ defmodule TimeTrackerLive.Application do
       # {TimeTrackerLive.Worker, arg},
       # Start to serve requests, typically the last entry
       TimeTrackerLiveWeb.Endpoint,
-      {TimeTrackerLive.Task, []}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

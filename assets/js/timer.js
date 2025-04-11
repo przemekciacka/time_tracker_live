@@ -60,7 +60,7 @@ function Timer(hook) {
     }
 
     function getTimePassed() {
-        const secondsPassed = Date.now() - _startTime;
+        const secondsPassed = Date.now() - _startTime * 1000;
         const hours = Math.floor(secondsPassed / 3600000);
         const minutes = Math.floor((secondsPassed % 3600000) / 60000);
         const seconds = Math.floor((secondsPassed % 60000) / 1000);
