@@ -52,6 +52,29 @@ defmodule TimeTrackerLiveWeb.Telemetry do
         unit: {:native, :millisecond}
       ),
 
+      # Database Metrics
+      summary("time_tracker_live.repo.query.total_time",
+        unit: {:native, :millisecond},
+        description: "The sum of the other measurements"
+      ),
+      summary("time_tracker_live.repo.query.decode_time",
+        unit: {:native, :millisecond},
+        description: "The time spent decoding the result"
+      ),
+      summary("time_tracker_live.repo.query.query_time",
+        unit: {:native, :millisecond},
+        description: "The time spent executing the query"
+      ),
+      summary("time_tracker_live.repo.query.queue_time",
+        unit: {:native, :millisecond},
+        description: "The time spent waiting for the query to be executed"
+      ),
+      summary("time_tracker_live.repo.query.idle_time",
+        unit: {:native, :millisecond},
+        description:
+          "The time spent waiting for the query to be executed"
+      ),
+
       # VM Metrics
       summary("vm.memory.total", unit: {:byte, :kilobyte}),
       summary("vm.total_run_queue_lengths.total"),

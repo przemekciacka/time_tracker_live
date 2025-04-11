@@ -35,3 +35,6 @@ time_tracker_live-*.tar
 npm-debug.log
 /assets/node_modules/
 
+# Database files
+*.db
+*.db-*

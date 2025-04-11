@@ -8,6 +8,7 @@
 import Config
 
 config :time_tracker_live,
+  ecto_repos: [TimeTrackerLive.Repo],
   generators: [timestamp_type: :utc_datetime]
 
 # Configures the endpoint
