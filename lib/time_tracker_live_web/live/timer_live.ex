@@ -16,10 +16,10 @@ defmodule TimeTrackerLiveWeb.TimerLive do
     {:ok, socket}
   end
 
-  def handle_event("toggle_timer", %{"name"=>name}, %{assigns: %{current: nil}} = socket) do
+  def handle_event("toggle_timer", %{"description"=>description}, %{assigns: %{current: nil}} = socket) do
     current_time = DateTime.utc_now() |> DateTime.to_unix()
 
-    socket = Timer.create_time_entry(%{start_time: current_time, description: name})
+    socket = Timer.create_time_entry(%{start_time: current_time, description: description})
              |> case do
                {:ok, time_entry} -> assign(socket, current: time_entry, start_time: time_entry.start_time)
                {:error, _} -> socket
@@ -34,8 +34,14 @@ defmodule TimeTrackerLiveWeb.TimerLive do
     {:noreply, assign(socket, %{current: nil, start_time: nil, time_entries: time_entries})}
   end
 
-  def handle_event("update_name", %{"name"=>name}, %{assigns: %{current: current}} = socket) do
-    Timer.update_description(current, name)
+  def handle_event("update_description", %{"description"=>description}, %{assigns: %{current: current}} = socket) do
+    Timer.update_description(current, description)
     {:noreply, socket}
+  end
+
+  def handle_event("delete_time_entry", %{"id"=>id}, socket) do
+    Timer.delete_time_entry(id)
+    time_entries = Timer.get_finished()
+    {:noreply, assign(socket, time_entries: time_entries)}
   end
 end

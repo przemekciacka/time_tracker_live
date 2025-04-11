@@ -76,4 +76,8 @@ defmodule TimeTrackerLive.Timer do
     |> Ecto.Changeset.change(description: description)
     |> Repo.update()
   end
+
+  def delete_time_entry(id) do
+    Repo.delete(%TimeEntry{id: String.to_integer(id)})
+  end
 end
