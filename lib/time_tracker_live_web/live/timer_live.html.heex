@@ -1,26 +1,26 @@
 <form phx-submit="toggle_timer" class="bg-white shadow-sm ring-1 ring-gray-900/10 sm:rounded-md mb-10">
   <div class="px-4 py-2">
     <div class="flex items-center gap-4">
-      <input type="text" name="description" value={@current && @current.description} phx-change="update_description" phx-debounce="500" placeholder="What are you working on?" class="border-0 w-full px-0" />
+      <input type="text" name="description" required value={@current && @current.description} phx-change="update_description" phx-debounce="500" placeholder="What are you working on?" class="border-0 w-full px-0" />
       <span id="timer-display" phx-hook="TimerDisplay" data-start-time={@start_time}>00:00:00</span>
       <.button class="leading-4">{if @start_time, do: "Finish", else: "Start"}</.button>
     </div>
   </div>
 </form>
 
+<%= for {date, entries} <- Enum.group_by(@time_entries, fn e -> e.end_time |> DateTime.from_unix!() |> DateTime.to_date() end) do %>
 <div class="divide-y divide-gray-200 overflow-hidden rounded-md ring-1 ring-gray-900/10 bg-white shadow">
   <div class="px-4 py-3 sm:px-6 bg-gray-100">
-    April 11, 2025
+    <%= Calendar.strftime(date, "%B %d, %Y") %>
   </div>
   <div>
-    
-      <%= for entry <- @time_entries do %>
+    <%= for entry <- entries do %>
       <div class="flex items-center gap-4 px-4 py-3 border-b border-gray-900/10 last:border-b-0">
         <span class="mr-auto">
           <%= entry.description %>
         </span>
         <div class="flex items-center gap-1 text-gray-900">
-          <svg xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-stopwatch"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 13a7 7 0 1 0 14 0a7 7 0 0 0 -14 0z" /><path d="M14.5 10.5l-2.5 2.5" /><path d="M17 8l1 -1" /><path d="M14 3h-4" /></svg>
+          <svg xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-</div>tabler-outline icon-tabler-stopwatch"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 13a7 7 0 1 0 14 0a7 7 0 0 0 -14 0z" /><path d="M14.5 10.5l-2.5 2.5" /><path d="M17 8l1 -1" /><path d="M14 3h-4" /></svg>
           <.format_seconds seconds={entry.end_time - entry.start_time} />
         </div>
         <.button phx-click="delete_time_entry" phx-value-id={entry.id} class="bg-transparent hover:bg-transparent text-gray-900 hover:text-red-900 active:text-red-900 px-1 py-0.5">
@@ -28,6 +28,6 @@
         </.button>
       </div>
       <% end %>
-    
   </div>
 </div>
+<% end %>

@@ -30,8 +30,9 @@ defmodule TimeTrackerLive.Timer do
   def get_finished do
     TimeEntry
     |> where([t], not is_nil(t.end_time))
+    |> order_by([t], desc: t.end_time)
     |> Repo.all()
-  end
+    end
 
   @doc """
   Creates a new time entry if no timer is currently running.

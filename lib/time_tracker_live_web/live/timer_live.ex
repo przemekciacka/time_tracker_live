@@ -34,8 +34,12 @@ defmodule TimeTrackerLiveWeb.TimerLive do
     {:noreply, assign(socket, %{current: nil, start_time: nil, time_entries: time_entries})}
   end
 
-  def handle_event("update_description", %{"description"=>description}, %{assigns: %{current: current}} = socket) do
+  def handle_event("update_description", %{"description"=>description}, %{assigns: %{current: current}} = socket) when not is_nil(current) do
     Timer.update_description(current, description)
+    {:noreply, socket}
+  end
+
+  def handle_event("update_description", _, %{assigns: %{current: nil}} = socket) do
     {:noreply, socket}
   end
 
